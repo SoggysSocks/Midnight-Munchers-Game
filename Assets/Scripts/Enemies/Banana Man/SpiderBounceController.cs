@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpiderBounceController : MonoBehaviour
 {
+    public float speed = 10;
+    int randomRot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,23 +17,27 @@ public class SpiderBounceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += Vector3.forward * Time.deltaTime * speed; 
     }
     public void RandomPos()
     {
-           // give nm number and reyurn it
+        // give nm number and reyurn it
+        randomRot = Random.Range(0, 360);
     }
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
+            Debug.Log("HIY WALLS");
             RandomPos();
             Rotate();
         }
        
     }
+
     public void Rotate()
     {
-        //rotate player baed om number
+        //rotate player based om number
+        transform.Rotate(0, randomRot, 0);
     }
 }
