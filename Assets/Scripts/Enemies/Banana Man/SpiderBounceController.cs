@@ -6,18 +6,29 @@ public class SpiderBounceController : MonoBehaviour
 {
     public float speed = 10;
     int randomRot;
+    private Rigidbody rb;
+    public bool onWall;
 
     // Start is called before the first frame update
     void Start()
     {
         RandomPos();
         Rotate();
+        onWall = false;
+        rb = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward * Time.deltaTime * speed; 
+        rb.velocity += transform.forward * Time.deltaTime * speed;
+
+        if (onWall == true)
+        {
+            StartCoroutine(Wait(0f));
+            onWall = false;
+        }
     }
     public void RandomPos()
     {
@@ -28,9 +39,15 @@ public class SpiderBounceController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("HIY WALLS");
-            RandomPos();
-            Rotate();
+            Debug.Log("HIT WALLS");
+            //RandomPos();
+            //Rotate();
+            onWall = true;
+
+        }
+        else
+        {
+            onWall = false;
         }
        
     }
@@ -39,5 +56,11 @@ public class SpiderBounceController : MonoBehaviour
     {
         //rotate player based om number
         transform.Rotate(0, randomRot, 0);
+    }
+    IEnumerator Wait(float seconds)
+    {
+        yield return new WaitForSeconds(3f);
+        RandomPos();
+        Rotate();
     }
 }
