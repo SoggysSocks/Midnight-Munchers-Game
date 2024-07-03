@@ -8,6 +8,7 @@ public class SpiderBounceController : MonoBehaviour
     int randomRot;
     private Rigidbody rb;
     public bool onWall;
+    public float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class SpiderBounceController : MonoBehaviour
         Rotate();
         onWall = false;
         rb = GetComponent<Rigidbody>();
+        
 
     }
 
@@ -23,6 +25,12 @@ public class SpiderBounceController : MonoBehaviour
     void Update()
     {
         rb.velocity += transform.forward * Time.deltaTime * speed;
+
+        timer += Time.deltaTime;
+        if (timer >= 7)
+        {
+            Destroy(gameObject);
+        }
 
         if (onWall == true)
         {
@@ -59,7 +67,7 @@ public class SpiderBounceController : MonoBehaviour
     }
     IEnumerator Wait(float seconds)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.02f);
         RandomPos();
         Rotate();
     }
