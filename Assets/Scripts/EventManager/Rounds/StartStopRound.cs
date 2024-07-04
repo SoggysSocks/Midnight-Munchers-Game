@@ -7,7 +7,7 @@ public class StartStopRound : MonoBehaviour
     public bool startRound;
     public bool doneTask;
 
-    public PlayerTimer playerTimer;
+  
 
     //public SpiderBounceController spiderBounceController; how o reference script
     // Start is called before the first frame update
