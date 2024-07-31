@@ -5,18 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class ToiletScript : MonoBehaviour
 {
+    //https://www.youtube.com/watch?v=Ehk9fKBwS3Y for lerp method
+
     RaycastHit hit;
     public Camera mainCamera;
     public Transform playerAim;
     public LineRenderer lineRend;
 
+    public float toiletScore;
+    public SoundManager soundManager;
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            FireRay();
-        }
+       // if (Input.GetButtonDown("Fire1"))
+
         FireRay();
+        soundManager.PeeSound();
         
     }
 
@@ -28,24 +31,37 @@ public class ToiletScript : MonoBehaviour
         {
             if (hit.collider.gameObject.CompareTag("ToiletBowl"))
             {
-                lineRend.enabled = true;
-                lineRend.SetPosition(0, playerAim.transform.position);
-                lineRend.SetPosition(1, hit.point);
 
+                SpawnRayCastLine();
                 Debug.Log("bowl IS HIT");
             }
             if (hit.collider.gameObject.CompareTag("ToiletWater"))
             {
 
-                Debug.Log("ToiletWater IS HIT");
+                SpawnRayCastLine();
+                Debug.Log("ToiletWater Is hit");
+            }
+            if (hit.collider.gameObject.CompareTag("ToiletTarget"))
+            {
+                SpawnRayCastLine();
+                toiletScore = Time.time;
+                Debug.Log("Toilet Target Hit");
+ 
+
             }
             else
             {
-                lineRend.enabled = true;
-                lineRend.SetPosition(0, playerAim.transform.position);
-                lineRend.SetPosition(1, hit.point);
+                toiletScore = toiletScore;
+                SpawnRayCastLine();
+                toiletScore = -Time.time;
             }
 
         } 
+    }
+    void SpawnRayCastLine()
+    {
+        lineRend.enabled = true;
+        lineRend.SetPosition(0, playerAim.transform.position);
+        lineRend.SetPosition(1, hit.point);
     }
 }
