@@ -17,7 +17,7 @@ public class ToiletScript : MonoBehaviour
     public float lerpSpeed = 4;
     public float aimOffset = 2;
     public float rayCastDistance = 20;
-    public float noiseAmount = 0.02f;
+    public float noiseAmount = 0.08f;
     public float noiseSpeed = 0.5f;
 
     public SoundManager soundManager;
@@ -29,7 +29,7 @@ public class ToiletScript : MonoBehaviour
 
     void Start()
     {
-        scoreMax = 600;
+        scoreMax = 150;
         previousHitPoint = playerAim.position;
        
         time = 0; //for noise
