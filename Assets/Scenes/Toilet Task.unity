@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -146,13 +146,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9380053}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 4, z: -11}
+  m_LocalRotation: {x: -0.19796212, y: -0.6788306, z: 0.19796216, w: 0.67883056}
+  m_LocalPosition: {x: -0.02999976, y: -0.49045798, z: 0.5142481}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 864210069}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &81236927
 GameObject:
@@ -296,7 +296,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &81236931
 MonoBehaviour:
@@ -538,7 +538,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 26.991467
+  field of view: 44
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -564,10 +564,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864210066}
   m_LocalRotation: {x: 0.19796215, y: 0.6788307, z: -0.1979622, w: 0.6788306}
-  m_LocalPosition: {x: 11.83, y: 4.69, z: -11.03}
+  m_LocalPosition: {x: 6.83, y: 8.690001, z: -11.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9380054}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 32.516, y: 90, z: 0}
@@ -589,7 +590,13 @@ MonoBehaviour:
   lineRend: {fileID: 864210071}
   toiletScore: 0
   scoreMax: 10
+  lerpSpeed: 4
+  aimOffset: 2
+  rayCastDistance: 20
+  noiseAmount: 0.02
+  noiseSpeed: 0.5
   soundManager: {fileID: 81236929}
+  pParticle: {fileID: 3128647884346813302, guid: b1a037bd6c9de324483f08b7cee38cbc, type: 3}
 --- !u!120 &864210071
 LineRenderer:
   serializedVersion: 2
@@ -941,7 +948,7 @@ Transform:
   m_Children:
   - {fileID: 1044178767}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557630520
 GameObject:
