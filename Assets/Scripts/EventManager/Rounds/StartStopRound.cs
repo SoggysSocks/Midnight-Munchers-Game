@@ -43,4 +43,9 @@ public class StartStopRound : MonoBehaviour
         doneTask = false;
 
     }
+
+    public void TaskToTrue()
+    {
+        doneTask = true;
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ToiletScript : MonoBehaviour
 {
-    //https://www.youtube.com/watch?v=Ehk9fKBwS3Y for lerp method
+    public StartStopRound startStopRound;
 
     RaycastHit hit;
     public Camera mainCamera;
@@ -13,14 +13,25 @@ public class ToiletScript : MonoBehaviour
     public LineRenderer lineRend;
 
     public float toiletScore;
+    public float scoreMax;
+
     public SoundManager soundManager;
-    void Update()
+
+    void start()
     {
-       // if (Input.GetButtonDown("Fire1"))
+        scoreMax = 0;
+    }
+    void FixedUpdate()
+    {
+        // if (Input.GetButtonDown("Fire1"))
+        if (scoreMax >= 600)
+        {
+            ToiletScoreMax();
+        }
 
         FireRay();
-        soundManager.PeeSound();
-        
+       
+
     }
 
     void FireRay()
@@ -44,24 +55,28 @@ public class ToiletScript : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("ToiletTarget"))
             {
                 SpawnRayCastLine();
-                toiletScore = Time.time;
+                toiletScore++;
                 Debug.Log("Toilet Target Hit");
- 
-
             }
             else
             {
                 toiletScore = toiletScore;
                 SpawnRayCastLine();
-                toiletScore = -Time.time;
             }
 
-        } 
+        }
+    }
+    public void ToiletScoreMax()
+    {
+        scoreMax = 0;
+        startStopRound.TaskToTrue();
     }
     void SpawnRayCastLine()
     {
         lineRend.enabled = true;
         lineRend.SetPosition(0, playerAim.transform.position);
         lineRend.SetPosition(1, hit.point);
+        soundManager.PeeSound();
     }
+
 }

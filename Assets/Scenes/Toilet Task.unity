@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 81236930}
   - component: {fileID: 81236929}
   - component: {fileID: 81236928}
+  - component: {fileID: 81236931}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -297,6 +298,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &81236931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81236927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3f9db539ea9af4fb14a12cbafb629a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRound: 0
+  doneTask: 0
 --- !u!1001 &304381840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -523,7 +538,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 71.7
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -568,11 +583,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c82ccd3a7f7a940b88a6191f99c2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startStopRound: {fileID: 81236931}
   mainCamera: {fileID: 864210068}
   playerAim: {fileID: 9380054}
   lineRend: {fileID: 864210071}
   toiletScore: 0
-  soundManager: {fileID: 0}
+  scoreMax: 10
+  soundManager: {fileID: 81236929}
 --- !u!120 &864210071
 LineRenderer:
   serializedVersion: 2
@@ -904,7 +921,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393529020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56905a78a0670ce4491a80507caf8886, type: 3}
   m_Name: 
