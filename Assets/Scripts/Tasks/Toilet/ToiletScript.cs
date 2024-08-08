@@ -19,6 +19,7 @@ public class ToiletScript : MonoBehaviour
     public float rayCastDistance = 20;
     public float noiseAmount = 0.08f;
     public float noiseSpeed = 0.5f;
+    public float decreaseScore = 0;
 
     public SoundManager soundManager;
     private Vector3 previousHitPoint;
@@ -37,6 +38,12 @@ public class ToiletScript : MonoBehaviour
     }
     void FixedUpdate()
     {
+        decreaseScore = Time.time;
+        if (decreaseScore >= 10 && toiletScore >= 1) ;
+        {
+            toiletScore = toiletScore - 0.1f;
+            decreaseScore = 0;  
+        }
         // if (Input.GetButtonDown("Fire1"))
         if (toiletScore >= scoreMax)
         {
@@ -55,7 +62,7 @@ public class ToiletScript : MonoBehaviour
 
 
 
-        time += Time.deltaTime * noiseSpeed;
+        time += noiseSpeed * Time.deltaTime;
 
         //soem noise thing i found online
         Vector3 noise = new Vector3(
