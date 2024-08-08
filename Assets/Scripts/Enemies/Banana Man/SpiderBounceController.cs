@@ -9,6 +9,9 @@ public class SpiderBounceController : MonoBehaviour
     private Rigidbody rb;
     public bool onWall;
     public float timer;
+    public float timeDuration = 12;
+
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +27,11 @@ public class SpiderBounceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity += transform.forward * Time.deltaTime * speed;
-
+  
+        rb.velocity += -transform.right * Time.deltaTime * speed;
+        
         timer += Time.deltaTime;
-        if (timer >= 7)
+        if (timer >= timeDuration)
         {
             Destroy(gameObject);
         }
