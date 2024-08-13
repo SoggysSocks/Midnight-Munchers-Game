@@ -88,7 +88,7 @@ public class ToiletScript : MonoBehaviour
             GameObject particleInstance = Instantiate(pParticle, hitPoint, Quaternion.identity);
 
 
-            Destroy(particleInstance, .8f); // Adjust the time based on your particle system's lifetime
+            Destroy(particleInstance, .8f); //time for destruction.
 
             if (hit.collider.gameObject.CompareTag("ToiletBowl"))
             {

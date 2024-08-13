@@ -11,11 +11,17 @@ public class SpiderBounceController : MonoBehaviour
     public float timer;
     public float timeDuration = 12;
 
+    public GameObject particleEffect;
+    public Transform particlePos;
+
     public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject particleInstance = Instantiate(particleEffect, particlePos.position, particlePos.rotation);
+        Destroy(particleInstance, 1f);
+        
         RandomPos();
         Rotate();
         onWall = false;
@@ -33,6 +39,8 @@ public class SpiderBounceController : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= timeDuration)
         {
+            GameObject particleInstance = Instantiate(particleEffect, particlePos.position, particlePos.rotation);
+            Destroy(particleInstance, 1f);
             Destroy(gameObject);
         }
 
@@ -40,7 +48,7 @@ public class SpiderBounceController : MonoBehaviour
         {
             StartCoroutine(Wait(0f));
             onWall = false;
-        }
+        }   
     }
     public void RandomPos()
     {
@@ -75,4 +83,5 @@ public class SpiderBounceController : MonoBehaviour
         RandomPos();
         Rotate();
     }
+
 }

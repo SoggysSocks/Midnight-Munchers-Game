@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
+{ // YOUTUBE VIID
     [Header("Movement")]
     public float moveSpeed;
     public float speedThing;
@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+
+   
     
     bool readyToJump;
 
@@ -24,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     public Transform orientation;
 
@@ -37,19 +39,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-
         readyToJump = true;
     }
-
+ 
     private void Update()
     {
+
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
-        
 
+      
         MyInput();
         SpeedControl();
 
@@ -76,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
 
             Jump();
-
+           
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
@@ -88,11 +92,19 @@ public class PlayerMovement : MonoBehaviour
 
         // on ground
         if(grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            
+        }
+            
 
         // in air
         else if(!grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            
+        }
+            
     }
 
     private void SpeedControl()
@@ -109,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

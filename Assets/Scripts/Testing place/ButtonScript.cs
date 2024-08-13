@@ -2,8 +2,8 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class ButtonScript : MonoBehaviour
-    {
+    public class ButtonScript : MonoBehaviour //NOT MY SCRIPT /NOT MY SCRIPT /NOT MY SCRIPT
+{
         public float buttonExt = 0.05f;
         public float timer = 0.8f; // Time before the button returns to its original position
         public GameObject InstantiateObject; // Object to instantiate when the button is pressed
