@@ -8,13 +8,11 @@ public class PlayerAnimations : MonoBehaviour
     public bool dayTime;
 
     public PlayerMovement playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (playerMovement == null)
-        {
-            Debug.LogError("PlayerMovement component is missing from the GameObject");
-        }
+
 
 
         anim = GetComponent<Animator>();
@@ -46,14 +44,18 @@ public class PlayerAnimations : MonoBehaviour
         {
             anim.SetTrigger("Jumping");
         }
+        if (playerMovement == null)
+        {
+            Debug.LogError("PlayerMovement component is missing from the GameObject");
+            if (playerMovement.grounded)
+            {
+                anim.SetBool("Ground", true);
+            }
+            else
+            {
+                anim.SetBool("Ground", false);
+            }
+        }
 
-        if (playerMovement.grounded)
-        {
-            anim.SetBool("Ground", true);
-        }
-        else
-        {
-            anim.SetBool("Ground", false);
-        }
     }
 }
