@@ -9,11 +9,13 @@ public class SnackTask : MonoBehaviour
     public bool snackTaskDone = false;
 
     public FridgeController fridgeController;
+    public StartStopRound startStopRound;
 
     // Start is called before the first frame update
     void Start()
     {
-        fridgeController = GetComponent<FridgeController>();
+        fridgeController = FindObjectOfType<FridgeController>();
+        
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class SnackTask : MonoBehaviour
             {
                 Debug.Log("drink");
                 snackTaskDone = true;
+                
             }
 
         }

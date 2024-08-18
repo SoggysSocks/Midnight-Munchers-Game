@@ -17,7 +17,7 @@ public class PlayerAnimations : MonoBehaviour
 
         anim = GetComponent<Animator>();
         dayTime = true;
-        playerMovement = GetComponent<PlayerMovement>();
+        
     }
 
     void Update()

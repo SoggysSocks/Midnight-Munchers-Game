@@ -1302,7 +1302,7 @@ Transform:
   - {fileID: 8487243948686743491}
   - {fileID: 4442599296857790331}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1870043956075872018
 Animator:
@@ -1372,6 +1372,7 @@ MonoBehaviour:
   particleEffect: {fileID: 4533839618423562031, guid: 478feccaa424bb94780b071cf3305b8c, type: 3}
   particlePos: {fileID: 5698064827817747816}
   anim: {fileID: 0}
+  healthSystem: {fileID: 0}
 --- !u!1 &4956841424263587679
 GameObject:
   m_ObjectHideFlags: 0

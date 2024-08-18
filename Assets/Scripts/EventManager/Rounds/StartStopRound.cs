@@ -13,6 +13,7 @@ public class StartStopRound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     
         startRound = false;
         doneTask = false;
     }
@@ -33,11 +34,11 @@ public class StartStopRound : MonoBehaviour
             EndRound();
         }
     }
-    void StartRound()
+    public void StartRound()
     {
         startRound = true;
     }
-    void EndRound()
+    public void EndRound()
     {
         startRound = false;
         doneTask = false;

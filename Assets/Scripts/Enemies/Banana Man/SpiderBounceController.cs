@@ -16,9 +16,19 @@ public class SpiderBounceController : MonoBehaviour
 
     public Animator anim;
 
+    public HealthSystem healthSystem;
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player"); // yt 
+        if (player != null)
+        {
+            healthSystem = player.GetComponent<HealthSystem>(); //
+        }
+
+
         GameObject particleInstance = Instantiate(particleEffect, particlePos.position, particlePos.rotation);
         Destroy(particleInstance, 1f);
         
@@ -63,13 +73,17 @@ public class SpiderBounceController : MonoBehaviour
             //RandomPos();
             //Rotate();
             onWall = true;
-
+            
         }
         else
         {
             onWall = false;
         }
-       
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            healthSystem.Damage();
+            Destroy(gameObject);
+        }
     }
 
     public void Rotate()
