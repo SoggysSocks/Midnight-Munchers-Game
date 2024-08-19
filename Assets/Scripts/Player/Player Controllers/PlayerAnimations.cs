@@ -13,8 +13,6 @@ public class PlayerAnimations : MonoBehaviour
     void Start()
     {
 
-
-
         anim = GetComponent<Animator>();
         dayTime = true;
         
@@ -46,7 +44,7 @@ public class PlayerAnimations : MonoBehaviour
         }
         if (playerMovement == null)
         {
-            Debug.LogError("PlayerMovement component is missing from the GameObject");
+            Debug.LogError("PlayerMovement component is missing ");
             if (playerMovement.grounded)
             {
                 anim.SetBool("Ground", true);

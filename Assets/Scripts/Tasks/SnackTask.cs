@@ -6,39 +6,31 @@ public class SnackTask : MonoBehaviour
 {
     RaycastHit hit;
     public Camera mainCamera;
-    public bool snackTaskDone = false;
-
-    public FridgeController fridgeController;
     public StartStopRound startStopRound;
-
     // Start is called before the first frame update
     void Start()
     {
-        fridgeController = FindObjectOfType<FridgeController>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.E))
         {
-            ShootRayDrink();
+            ShootRaySnack();
         }
-
     }
-    public void ShootRayDrink()
+    public void ShootRaySnack()
     {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(cameraRay, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Drink") && fridgeController.isOpen)
+            if (hit.collider.gameObject.CompareTag("Snack"))
             {
-                Debug.Log("drink");
-                snackTaskDone = true;
-                
+
+                startStopRound.doneTask = true;
             }
 
         }

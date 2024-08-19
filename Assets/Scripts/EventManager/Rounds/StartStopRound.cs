@@ -7,13 +7,13 @@ public class StartStopRound : MonoBehaviour
     public bool startRound;
     public bool doneTask;
 
-  
+    public TaskTimer taskTimer;
 
     //public SpiderBounceController spiderBounceController; how o reference script
     // Start is called before the first frame update
     void Start()
     {
-     
+
         startRound = false;
         doneTask = false;
     }
@@ -21,27 +21,36 @@ public class StartStopRound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     if (!startRound && doneTask)
+        {
+            doneTask = false; 
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bed") && !doneTask)
+        if (collision.gameObject.CompareTag("Bed") && !doneTask && !startRound)
         {
-            startRound = true;
+            StartRound();
+
         }
-        if (collision.gameObject.CompareTag("Bed") && doneTask)
+        if (collision.gameObject.CompareTag("Bed") && doneTask && startRound)
         {
             EndRound();
         }
+         
     }
     public void StartRound()
     {
         startRound = true;
+        taskTimer.RandomNumber();
     }
     public void EndRound()
     {
         startRound = false;
         doneTask = false;
+
+        taskTimer.ResetTime();
+        Debug.Log("Round Ended");
 
     }
 
