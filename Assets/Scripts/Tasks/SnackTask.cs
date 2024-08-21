@@ -7,6 +7,7 @@ public class SnackTask : MonoBehaviour
     RaycastHit hit;
     public Camera mainCamera;
     public StartStopRound startStopRound;
+    public RoundSystem roundSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +17,14 @@ public class SnackTask : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (roundSystem.snackTask)  
         {
-            ShootRaySnack();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ShootRaySnack();
+            }
         }
+
     }
     public void ShootRaySnack()
     {
@@ -36,3 +41,4 @@ public class SnackTask : MonoBehaviour
         }
     }
 }
+

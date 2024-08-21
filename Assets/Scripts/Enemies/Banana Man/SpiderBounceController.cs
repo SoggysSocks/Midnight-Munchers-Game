@@ -69,7 +69,6 @@ public class SpiderBounceController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("HIT WALLS");
             //RandomPos();
             //Rotate();
             onWall = true;
