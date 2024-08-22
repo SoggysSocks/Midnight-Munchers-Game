@@ -17,6 +17,8 @@ public class RoundSystem : MonoBehaviour
 
     // LIST OF TASKS // BOOLS //
     public bool snackTask = false;
+    public bool fridgeDrinkTask = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,15 +65,15 @@ public class RoundSystem : MonoBehaviour
         {
             snackTask = true;
         }
-        if (taskNumber == 2)
+        else if (taskNumber == 2)
+        {
+            fridgeDrinkTask = true;
+        }
+         else if (taskNumber == 3)
         {
             
         }
-        if (taskNumber == 3)
-        {
-            
-        }
-        if (taskNumber == 4)
+        else if (taskNumber == 4)
         {
             
         }
@@ -84,7 +86,7 @@ public class RoundSystem : MonoBehaviour
     }
     public void RandomNumberTask()
     {
-        taskNumber = Random.Range(1, 5);
+        taskNumber = Random.Range(0, 3);
     }
     void AllTaskToFalse()
     {

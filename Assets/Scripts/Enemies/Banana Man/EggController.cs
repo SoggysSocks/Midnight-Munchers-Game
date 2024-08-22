@@ -23,10 +23,10 @@ public class EggController : MonoBehaviour
 
         if (hatchTimer >= 6.15f)
         {
-            Instantiate(spiderBanPrefab, prefabTransorm.position, prefabTransorm.rotation);
-            Instantiate(spiderBanPrefab, prefabTransorm.position, prefabTransorm.rotation);
-            Instantiate(spiderBanPrefab, prefabTransorm.position, prefabTransorm.rotation);
-            Instantiate(spiderBanPrefab, prefabTransorm.position, prefabTransorm.rotation);
+            Instantiate(spiderBanPrefab, prefabTransorm.position, Quaternion.identity);
+            Instantiate(spiderBanPrefab, prefabTransorm.position, Quaternion.identity);
+            Instantiate(spiderBanPrefab, prefabTransorm.position, Quaternion.identity);
+            Instantiate(spiderBanPrefab, prefabTransorm.position, Quaternion.identity);
 
             Destroy(gameObject);
         }

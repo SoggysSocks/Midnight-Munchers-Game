@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class DrinkTask : MonoBehaviour
 {
+    
     RaycastHit hit;
     public Camera mainCamera;
     public bool snackTaskDone = false;
 
     public FridgeController fridgeController;
     public StartStopRound startStopRound;
+    public RoundSystem roundSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,14 @@ public class DrinkTask : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (roundSystem.fridgeDrinkTask)
         {
-            ShootRayDrink();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                {
+                    ShootRayDrink();
+                }
+            }
         }
 
     }
@@ -34,7 +40,7 @@ public class DrinkTask : MonoBehaviour
 
         if (Physics.Raycast(cameraRay, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Drink") && fridgeController.isOpen)
+            if (hit.collider.gameObject.CompareTag("Drink") && fridgeController.isOpen && roundSystem.fridgeDrinkTask)  
             {
                 Debug.Log("drink");
                 snackTaskDone = true;
