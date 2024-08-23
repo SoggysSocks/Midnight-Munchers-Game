@@ -13,13 +13,15 @@ public class ToiletScript : MonoBehaviour
     public LineRenderer lineRend;
 
     public float toiletScore;
-    public float scoreMax;
+    public float scoreMax = 150;
     public float lerpSpeed = 4;
-    public float aimOffset = 2;
+    public float aimOffset = 1;
     public float rayCastDistance = 20;
     public float noiseAmount = 0.08f;
     public float noiseSpeed = 0.5f;
     public float decreaseScore = 0;
+
+    public bool canPee = false;
 
     public SoundManager soundManager;
     private Vector3 previousHitPoint;
@@ -38,33 +40,38 @@ public class ToiletScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        decreaseScore = Time.time;
-        if (decreaseScore >= 10 && toiletScore >= 1) ;
-        {
-            toiletScore = toiletScore - 0.1f;
-            decreaseScore = 0;  
-        }
+        //decreaseScore = Time.time;
+        //if (decreaseScore >= 10 && toiletScore >= 1)
+        //{
+            //toiletScore = toiletScore - 0.1f;
+            //decreaseScore = 0;  
+        //}
         // if (Input.GetButtonDown("Fire1"))
-        if (toiletScore >= scoreMax)
-        {
-            ToiletScoreMax();
-        }
+        //if (toiletScore >= scoreMax)
+        //{
+            //ToiletScoreMax();
+        //}
 
-        FireRay();
-       
+
+        //if (canPee)
+        //{
+            FireRay();
+        //}
+        
+        
 
     }
 
     void FireRay()
     {
-
+        
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
 
 
         time += noiseSpeed * Time.deltaTime;
 
-        //soem noise thing i found online
+        // noise generator  i found online
         Vector3 noise = new Vector3(
             Mathf.PerlinNoise(time, 0) - 0.5f,
             Mathf.PerlinNoise(0, time) - 0.5f,
@@ -76,11 +83,11 @@ public class ToiletScript : MonoBehaviour
         Vector3 offsetOrigin = cameraRay.origin;
         offsetOrigin.y -= aimOffset;
 
-
+        
         Vector3 rayNoise = cameraRay.direction + noise; //gets 
 
-
-        if (Physics.Raycast(offsetOrigin, rayNoise, out hit, rayCastDistance))
+        //if (Physics.Raycast(offsetOrigin, rayNoise, out hit, rayCastDistance))
+        if (Physics.Raycast(offsetOrigin, rayNoise, out hit))
         {
 
             Vector3 hitPoint = hit.point;
@@ -113,7 +120,7 @@ public class ToiletScript : MonoBehaviour
                 toiletScore = toiletScore;
                 SpawnRayCastLine();
             }
-
+            SpawnRayCastLine();
         }
 
     }
@@ -138,5 +145,15 @@ public class ToiletScript : MonoBehaviour
         // lineRend.SetPosition(1, hit.point);
         //soundManager.PeeSound();
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            canPee = true;
+        }
+        else
+        {
+            canPee = false;
+        }
+    }
 }

@@ -10,5 +10,8 @@ public void PeeSound()
     {
         sounds[0].Play();
     }
-
+public void RollSoundBMan()
+    {
+        sounds[1].Play();
+    }
 }
