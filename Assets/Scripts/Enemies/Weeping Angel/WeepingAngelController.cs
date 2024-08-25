@@ -28,12 +28,26 @@ public class WeepingAngelController : MonoBehaviour
     public float catchDistance;
 
     //The amount of seconds it takes for the AI's jumpscare to finish
-    public float jumpscareTime;
+    public float jumpscareTime = 0;
 
     //The scene you load into after dying
     public string sceneAfterDeath;
 
+    public HealthSystem healthSystem;
+    public AudioSource audioSouce;
+    public AudioSource audioSouce2;
+    public AudioClip bangSound;
+    public AudioClip footSteps;
+    public bool soundBool = false;
+
     //The Update() void, stuff occurs every frame in this void
+    private void Start()    
+    {
+        //need reference for prefab
+        playerCam = Camera.main;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        healthSystem = player.GetComponent<HealthSystem>();
+    }
     void Update()
     {
         //Calculate the player's Camera's frustum planes
@@ -46,18 +60,36 @@ public class WeepingAngelController : MonoBehaviour
         if (GeometryUtility.TestPlanesAABB(planes, this.gameObject.GetComponent<Renderer>().bounds))
         {
             ai.speed = 0; //The AI's speed will equal to 0
+            
 
             //If the player object is active,
             if (player.gameObject.active == true)
             {
                 aiAnim.speed = 0; //The AI'S animation speed will be set to 0
-            }
+                if (!soundBool)
+                {
+                    audioSouce.pitch = 0.9f;
+                    audioSouce.PlayOneShot(bangSound);
+                    soundBool = true;
+                    }
+                    
+                }
             ai.SetDestination(transform.position); //The AI's destination will be set to themselves to stop a delay in the movement stopping
+        }
+        else
+        {
+            soundBool = false;
+
         }
 
         //If the AI isn't in the player's Camera's view,
         if (!GeometryUtility.TestPlanesAABB(planes, this.gameObject.GetComponent<Renderer>().bounds))
         {
+            //audioSouce.pitch = 1.8f;
+           
+            //audioSouce.clip = footSteps;
+            audioSouce2.Play();
+
             ai.speed = aiSpeed; //The AI's speed will equal to the value of aiSpeed
             aiAnim.speed = 1; //The AI's animation speed will be set to 1
             dest = player.position; //dest will equal to the player's position
@@ -66,7 +98,7 @@ public class WeepingAngelController : MonoBehaviour
             //If the distance between the player and the AI is less than or equal to the catchDistance,
             if (distance <= catchDistance)
             {
-                player.gameObject.SetActive(false); //The player object will be set false
+                //player.gameObject.SetActive(false); //The player object will be set false
                 aiAnim.Play("jumpscareee");
                 StartCoroutine(killPlayer()); //The killPlayer() coroutine will start
             }
@@ -76,6 +108,8 @@ public class WeepingAngelController : MonoBehaviour
     IEnumerator killPlayer()
     {
         yield return new WaitForSeconds(jumpscareTime); //After the amount of seconds determined by the jumpscareTime,
-        SceneManager.LoadScene(sceneAfterDeath); //The scene after death will load
+        healthSystem.Damage();
+        Destroy(gameObject);
+        //SceneManager.LoadScene(sceneAfterDeath); //The scene after death will load
     }
 }

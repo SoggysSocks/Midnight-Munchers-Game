@@ -10,7 +10,7 @@ public class FridgeController : MonoBehaviour
     public Camera mainCamera;
     public Animator anim;
     public bool isOpen = false;
-    
+    private float playerDistance = 3;
 
     void Update()
     {
@@ -24,10 +24,10 @@ public class FridgeController : MonoBehaviour
     }
 
     void ShootRay()
-    {
+    {   
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out hit))
+        if (Physics.Raycast(cameraRay, out hit, playerDistance))
         {
             if (hit.collider.gameObject.CompareTag("Fridge") && !isOpen)
             {

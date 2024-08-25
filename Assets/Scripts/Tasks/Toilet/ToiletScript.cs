@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ToiletScript : MonoBehaviour
 {
     public StartStopRound startStopRound;
+    public RoundSystem roundSystem;
 
     RaycastHit hit;
     public Camera mainCamera;
@@ -21,7 +22,7 @@ public class ToiletScript : MonoBehaviour
     public float noiseSpeed = 0.5f;
     public float decreaseScore = 0;
 
-    public bool canPee = false;
+    public bool canPeeArea = false;
 
     public SoundManager soundManager;
     private Vector3 previousHitPoint;
@@ -29,7 +30,7 @@ public class ToiletScript : MonoBehaviour
     private float time; //noise
 
     public GameObject pParticle;
-
+    public GameObject toiletUI; 
     void Start()
     {
         scoreMax = 150;
@@ -43,20 +44,29 @@ public class ToiletScript : MonoBehaviour
         //decreaseScore = Time.time;
         //if (decreaseScore >= 10 && toiletScore >= 1)
         //{
-            //toiletScore = toiletScore - 0.1f;
-            //decreaseScore = 0;  
+        //toiletScore = toiletScore - 0.1f;
+        //decreaseScore = 0;  
         //}
         // if (Input.GetButtonDown("Fire1"))
         //if (toiletScore >= scoreMax)
         //{
-            //ToiletScoreMax();
+        //ToiletScoreMax();
         //}
 
 
-        //if (canPee)
-        //{
-            FireRay();
-        //}
+        if (roundSystem.peeTask)
+        {
+            if(canPeeArea)
+            {
+                toiletUI.SetActive(true);
+                FireRay();
+            }
+
+        }
+        else
+        {
+            toiletUI.SetActive(false) ;
+        }
         
         
 
@@ -87,6 +97,8 @@ public class ToiletScript : MonoBehaviour
         Vector3 rayNoise = cameraRay.direction + noise; //gets 
 
         //if (Physics.Raycast(offsetOrigin, rayNoise, out hit, rayCastDistance))
+        // had to get rid of distance, bugged out the game.
+
         if (Physics.Raycast(offsetOrigin, rayNoise, out hit))
         {
 
@@ -149,11 +161,11 @@ public class ToiletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            canPee = true;
+            canPeeArea = true;
         }
         else
         {
-            canPee = false;
+            canPeeArea = false;
         }
     }
 }

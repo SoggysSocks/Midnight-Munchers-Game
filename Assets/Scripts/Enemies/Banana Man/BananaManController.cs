@@ -70,17 +70,21 @@ public class BananaManController : MonoBehaviour
         }
         if(spawnTimer >= spawnPrefabEvery)
         {
+            anim.SetTrigger("IsThrowing");
             
-            anim.SetBool("IsThrowing", true);
             spawnTimer = 0;
             StartCoroutine(ThrowingTimer());
         }
 
-        if (agent.remainingDistance <= 0.1f)
+        if (agent.remainingDistance == 0)
         {
 
-                anim.SetBool("IsWalking", false);
+            anim.SetBool("IsWalking", false);
   
+        }  
+        if (agent.velocity.sqrMagnitude > 0.1f)
+       {
+           anim.SetBool("IsWalking", true);
         }
         if (anim.GetBool("IsRolling"))
         {
@@ -107,10 +111,10 @@ public class BananaManController : MonoBehaviour
         }
         else
         {
-            anim.SetBool("IsWalking", false);
+            //anim.SetBool("IsWalking", false);
             
         }
-    
+     //
     }
 
 
@@ -146,7 +150,7 @@ public class BananaManController : MonoBehaviour
     }
     IEnumerator ThrowingTimer()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.8f);
         SpawnPrefab();
         anim.SetBool("IsThrowing", false);
         Debug.Log("spawned and anim 4 banana man");
@@ -157,6 +161,7 @@ public class BananaManController : MonoBehaviour
         agent.speed = normalSpeed;
         anim.SetBool("IsJumping", false);
         anim.SetBool("IsRolling", false);
+        agent.SetDestination(transform.position);
 
     }
 

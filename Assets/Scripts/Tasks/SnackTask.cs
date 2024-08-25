@@ -8,6 +8,8 @@ public class SnackTask : MonoBehaviour
     public Camera mainCamera;
     public StartStopRound startStopRound;
     public RoundSystem roundSystem;
+    private float playerDistance = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class SnackTask : MonoBehaviour
     {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out hit))
+        if (Physics.Raycast(cameraRay, out hit, playerDistance))
         {
             if (hit.collider.gameObject.CompareTag("Snack"))
             {

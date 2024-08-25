@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
+    public GameOver gameOver;
+
     public int maxHealth;
     public int heartNumber;
 
@@ -55,8 +57,8 @@ public class HealthSystem : MonoBehaviour
 
         if (maxHealth <= 0)
         {
-            Debug.Log("Game Over");
-
+            
+            gameOver.EndGame();
         }
     }
 }

@@ -10,6 +10,7 @@ public class RoundSystem : MonoBehaviour
 
     public int numberOfRounds;
     public int taskNumber;
+    public int previousNumber;
     public bool startNight;
     public bool enableNight;
     public bool hasStarted = false;
@@ -18,6 +19,8 @@ public class RoundSystem : MonoBehaviour
     // LIST OF TASKS // BOOLS //
     public bool snackTask = false;
     public bool fridgeDrinkTask = false;
+    public bool homeworkTask = false;
+    public bool peeTask = false;
 
 
     // Start is called before the first frame update
@@ -48,6 +51,11 @@ public class RoundSystem : MonoBehaviour
             startNight = false;
             enableNight = true;
             startStopRound.EndRound();
+            taskNumber = 0;
+        }
+        if (startStopRound.startRound && !startStopRound.doneTask)
+        {
+            previousNumber = taskNumber;
         }
 
         //Nightmare
@@ -65,28 +73,36 @@ public class RoundSystem : MonoBehaviour
         {
             snackTask = true;
         }
-        else if (taskNumber == 2)
+        if (taskNumber == 2)
         {
             fridgeDrinkTask = true;
         }
-         else if (taskNumber == 3)
+        if (taskNumber == 3)
         {
-            
+            homeworkTask = true;
         }
-        else if (taskNumber == 4)
+        if (taskNumber == 4)
         {
-            
+            peeTask = true;
+        }
+        if (taskNumber == 4)
+        {
+            peeTask = true;
         }
     }
 
 
     public void RandomNumberRounds()
     {
-        numberOfRounds = Random.Range(2, 5);
+        numberOfRounds = Random.Range(2, 6);
     }
     public void RandomNumberTask()
     {
-        taskNumber = Random.Range(0, 3);
+        taskNumber = Random.Range(1, 5);
+        if (taskNumber == previousNumber)
+        {
+            RandomNumberTask();
+        }
     }
     void AllTaskToFalse()
     {

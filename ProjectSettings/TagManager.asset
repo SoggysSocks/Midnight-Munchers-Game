@@ -8,6 +8,11 @@ TagManager:
   - Bed
   - ToiletBowl
   - ToiletWater
+  - Drink
+  - ToiletArea
+  - ToiletTarget
+  - Snack
+  - Fridge
   layers:
   - Default
   - TransparentFX
@@ -18,9 +23,9 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - whatIsGround
-  - 
+  - Post Proccessing
   - 
   - 
   - 

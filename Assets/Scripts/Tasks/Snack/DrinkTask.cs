@@ -12,6 +12,7 @@ public class DrinkTask : MonoBehaviour
     public FridgeController fridgeController;
     public StartStopRound startStopRound;
     public RoundSystem roundSystem;
+    private float playerDistance = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -23,28 +24,27 @@ public class DrinkTask : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (roundSystem.fridgeDrinkTask)
-        {
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 {
                     ShootRayDrink();
                 }
             }
-        }
+
 
     }
     public void ShootRayDrink()
     {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out hit))
+        if (Physics.Raycast(cameraRay, out hit, playerDistance))
         {
             if (hit.collider.gameObject.CompareTag("Drink") && fridgeController.isOpen && roundSystem.fridgeDrinkTask)  
             {
                 Debug.Log("drink");
                 snackTaskDone = true;
-                
+                startStopRound.doneTask = true;
             }
 
         }
