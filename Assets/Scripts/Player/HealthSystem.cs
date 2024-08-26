@@ -13,6 +13,9 @@ public class HealthSystem : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite EmptyHeart; // skull
+    public Animator UIanim; //UI
+
+    public List<AudioSource> sounds;
     // Start is called before the first frame update
 
 
@@ -53,12 +56,19 @@ public class HealthSystem : MonoBehaviour
     }
     public void Damage()
     {
-        maxHealth = maxHealth - 1;
-
-        if (maxHealth <= 0)
+        if (maxHealth <= 1)
         {
             
             gameOver.EndGame();
+            
+        } else
+        {
+            sounds[0].Play();
+            sounds[1].Play();
+            sounds[2].Play();
+            maxHealth = maxHealth - 1;
+            UIanim.SetTrigger("DamagePlayer");
+
         }
     }
 }

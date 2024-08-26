@@ -13,6 +13,8 @@ public class StartStopRound : MonoBehaviour
 
     public RoundSystem roundsystem;
 
+    public Animator uiAnim;
+    
     //public SpiderBounceController spiderBounceController; how o reference script
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class StartStopRound : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bed") && doneTask && startRound)
         {
+            uiAnim.SetTrigger("Sleep");
             EndRound();
             if (roundsystem.startNight)
             {

@@ -39,10 +39,12 @@ public class WeepingAngelController : MonoBehaviour
     public AudioClip bangSound;
     public AudioClip footSteps;
     public bool soundBool = false;
+    public bool soundBool2 = false;
 
     //The Update() void, stuff occurs every frame in this void
     private void Start()    
     {
+        
         //need reference for prefab
         playerCam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -70,6 +72,7 @@ public class WeepingAngelController : MonoBehaviour
                 {
                     audioSouce.pitch = 0.9f;
                     audioSouce.PlayOneShot(bangSound);
+                    
                     soundBool = true;
                     }
                     
@@ -79,16 +82,32 @@ public class WeepingAngelController : MonoBehaviour
         else
         {
             soundBool = false;
+            audioSouce.pitch = 1.4f;
+            
+        }
+        if (!soundBool)
+        {
+            if (soundBool2)
+            {
+                audioSouce2.Play();
+                audioSouce2.PlayOneShot(footSteps);
+                soundBool2 = false;
+            }
 
+        }
+        else
+        {
+            soundBool2 = true;
+            audioSouce2.Stop();
         }
 
         //If the AI isn't in the player's Camera's view,
         if (!GeometryUtility.TestPlanesAABB(planes, this.gameObject.GetComponent<Renderer>().bounds))
         {
             //audioSouce.pitch = 1.8f;
-           
+            
             //audioSouce.clip = footSteps;
-            audioSouce2.Play();
+
 
             ai.speed = aiSpeed; //The AI's speed will equal to the value of aiSpeed
             aiAnim.speed = 1; //The AI's animation speed will be set to 1

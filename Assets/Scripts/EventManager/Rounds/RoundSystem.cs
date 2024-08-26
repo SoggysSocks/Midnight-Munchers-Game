@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RoundSystem : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class RoundSystem : MonoBehaviour
     public bool fridgeDrinkTask = false;
     public bool homeworkTask = false;
     public bool peeTask = false;
+    public bool nightnumres = true;
+    public int nightNumber;
 
+    public TextMeshProUGUI _text;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class RoundSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!startNight)
         {
             // RandomNumberRounds(); //would scroll endlessly. new one in start stop when touches bed.
@@ -52,6 +57,20 @@ public class RoundSystem : MonoBehaviour
             enableNight = true;
             startStopRound.EndRound();
             taskNumber = 0;
+
+        }
+        if (numberOfRounds <= 0)
+        {
+            if (nightnumres)
+            {
+                nightNumber++;
+                nightnumres = false;
+                _text.text = nightNumber.ToString();
+            }
+        }
+        else
+        {
+            nightnumres = true;
         }
         if (startStopRound.startRound && !startStopRound.doneTask)
         {
@@ -71,23 +90,28 @@ public class RoundSystem : MonoBehaviour
         // Tasks //
         if (taskNumber == 1)
         {
+            AllTaskToFalse();
             snackTask = true;
         }
         if (taskNumber == 2)
         {
+            AllTaskToFalse();
             fridgeDrinkTask = true;
         }
         if (taskNumber == 3)
         {
+            AllTaskToFalse();
             homeworkTask = true;
         }
         if (taskNumber == 4)
         {
+            AllTaskToFalse();
             peeTask = true;
         }
-        if (taskNumber == 4)
+        if (taskNumber == 5)
         {
-            peeTask = true;
+            AllTaskToFalse();
+
         }
     }
 
@@ -107,5 +131,8 @@ public class RoundSystem : MonoBehaviour
     void AllTaskToFalse()
     {
         snackTask = false;
+        fridgeDrinkTask = false;
+        homeworkTask = false;
+        peeTask = false;
     }
 }
