@@ -14,7 +14,10 @@ public class StartStopRound : MonoBehaviour
     public RoundSystem roundsystem;
 
     public Animator uiAnim;
-    
+
+    public AudioSource audioSource;
+    private bool soundBool = true;
+
     //public SpiderBounceController spiderBounceController; how o reference script
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,13 @@ public class StartStopRound : MonoBehaviour
         {
             doneTask = false;
         }
+        if (doneTask && soundBool)
+        {
+            audioSource.Play();
+            soundBool = false;
+        }
+
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -54,6 +64,7 @@ public class StartStopRound : MonoBehaviour
             if (roundsystem.startNight)
             {
                 StartRound();
+                soundBool = true;
             }
         }
 

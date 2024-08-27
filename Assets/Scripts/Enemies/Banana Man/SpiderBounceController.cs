@@ -18,10 +18,13 @@ public class SpiderBounceController : MonoBehaviour
 
     public HealthSystem healthSystem;
     public GameObject player;
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource.Play();
         player = GameObject.FindWithTag("Player"); // yt 
         if (player != null)
         {
@@ -73,6 +76,7 @@ public class SpiderBounceController : MonoBehaviour
             //Rotate();
             onWall = true;
             
+            
         }
         else
         {
@@ -89,6 +93,7 @@ public class SpiderBounceController : MonoBehaviour
     {
         //rotate player based om number
         transform.Rotate(0, randomRot, 0);
+        audioSource2.Play();
     }
     IEnumerator Wait(float seconds)
     {

@@ -8,6 +8,7 @@ public class PlayerAnimations : MonoBehaviour
     public bool dayTime;
 
     public PlayerMovement playerMovement;
+    public List<AudioSource> sounds;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class PlayerAnimations : MonoBehaviour
 
         anim = GetComponent<Animator>();
         dayTime = true;
-        
+
     }
 
     void Update()
@@ -23,10 +24,13 @@ public class PlayerAnimations : MonoBehaviour
         if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !dayTime)
         {
             anim.SetBool("Walking", true);
+            sounds[0].Play();
+            sounds[0].pitch = 2;
         }
         else
         {
             anim.SetBool("Walking", false);
+            AllSoundsOff();
         }
 
         if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && dayTime)
@@ -41,13 +45,15 @@ public class PlayerAnimations : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && playerMovement.grounded)
         {
             anim.SetTrigger("Jumping");
+            
         }
         if (playerMovement == null)
         {
-            Debug.LogError("PlayerMovement component is missing ");
+            Debug.LogError("PlayerMovement is missing ");
             if (playerMovement.grounded)
             {
                 anim.SetBool("Ground", true);
+                sounds[0].Play();
             }
             else
             {
@@ -55,5 +61,9 @@ public class PlayerAnimations : MonoBehaviour
             }
         }
 
+    }
+    public void AllSoundsOff()
+    {
+        sounds[0].Stop();
     }
 }
