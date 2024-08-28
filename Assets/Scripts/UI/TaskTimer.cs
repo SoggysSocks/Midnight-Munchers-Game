@@ -14,6 +14,7 @@ public class TaskTimer : MonoBehaviour
 
     int randomTime;
     bool randomTimeBool;
+    public DayNight dayNight;
 
     public HealthSystem healthSystem;
 
@@ -21,6 +22,7 @@ public class TaskTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dayNight = FindObjectOfType<DayNight>();
         RandomNumber();
     }
 
@@ -49,6 +51,7 @@ public class TaskTimer : MonoBehaviour
                     ResetTime();
                     startStopRound.startRound = false;
                     startStopRound.EndRound();
+                    dayNight.DayTime();
 
                 }
 

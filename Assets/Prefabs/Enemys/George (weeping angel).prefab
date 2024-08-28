@@ -861,6 +861,7 @@ MonoBehaviour:
   footSteps: {fileID: 8300000, guid: e2a8bfec944ea83488140415bd02b582, type: 3}
   soundBool: 0
   soundBool2: 0
+  startStopRound: {fileID: 0}
 --- !u!195 &2257013434006249732
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -869,7 +870,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2257013434006249737}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: 1479372276
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 100

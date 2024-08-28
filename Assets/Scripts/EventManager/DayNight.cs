@@ -23,7 +23,7 @@ public class DayNight : MonoBehaviour
     {
 
     }
-    public void DayTime()
+    public void DayTime() //when function plays sound makes lights active
     {
         if (soundBool)
         {
@@ -39,7 +39,7 @@ public class DayNight : MonoBehaviour
 
         
     }
-    public void NightTime()
+    public void NightTime() //when function makes lights off and plays sounds
     {
         if (!soundBool)
         {

@@ -1376,8 +1376,10 @@ MonoBehaviour:
   anim: {fileID: 0}
   healthSystem: {fileID: 0}
   player: {fileID: 0}
+  bMan: {fileID: 9110259577885482329, guid: b1b1769e64ffbe2448e0d36df56a5cec, type: 3}
   audioSource: {fileID: 1278174097053523752}
   audioSource2: {fileID: 7503959752125375424}
+  time: 0
 --- !u!82 &1278174097053523752
 AudioSource:
   m_ObjectHideFlags: 0

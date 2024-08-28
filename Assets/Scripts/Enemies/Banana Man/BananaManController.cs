@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class BananaManController : MonoBehaviour
 {
     public SoundManager soundManager;
+    public StartStopRound startStopRound;
 
     public float range = 15;
     public float walkTimer = 5;
@@ -34,6 +35,8 @@ public class BananaManController : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform; //getting refercne at start because prefab
+        startStopRound = FindObjectOfType<StartStopRound>();
         playerRangeMin = playerRangeRoll;
         agent = GetComponent<NavMeshAgent>();
         timer = walkTimer;
@@ -44,6 +47,10 @@ public class BananaManController : MonoBehaviour
 
     void Update()
     {
+        if (startStopRound.deleteAllEnemys) // Deletes enemy when player is damaged or round has ended
+        {
+            Destroy(gameObject);
+        }
         timer += Time.deltaTime;
         spawnTimer += Time.deltaTime;
         if (timer >= walkTimer)
@@ -51,24 +58,24 @@ public class BananaManController : MonoBehaviour
 
             float randomNumber = Random.value;
 
-            if (randomNumber <= 0.5 && Vector3.Distance(transform.position, player.position) <= playerRangeRoll)
+            if (randomNumber <= 0.5 && Vector3.Distance(transform.position, player.position) <= playerRangeRoll) //chance between two nuumvers that it rolls at palyer
             {
                 RollToPlayer();
                 timer = 0;
             } 
-            else if (randomNumber <= 0.3 && Vector3.Distance(transform.position, player.position) <= playerRangeMax && Vector3.Distance(transform.position, player.position) >= playerRangeMin)
+            else if (randomNumber <= 0.3 && Vector3.Distance(transform.position, player.position) <= playerRangeMax && Vector3.Distance(transform.position, player.position) >= playerRangeMin) //chance between to numbers that it jumps at player
             {
                 JumpToPlayer();
                 timer = 0;
             }
             else
             {
-                RandomPos();
+                RandomPos(); //if it isnt both it will jsut walk randomly
                 timer = 0;
             }
 
         }
-        if(spawnTimer >= spawnPrefabEvery)
+        if(spawnTimer >= spawnPrefabEvery) //if timer reaches poitn it plays functyion and resets timer
         {
             anim.SetTrigger("IsThrowing");
             
@@ -76,17 +83,17 @@ public class BananaManController : MonoBehaviour
             StartCoroutine(ThrowingTimer());
         }
 
-        if (agent.remainingDistance == 0)
+        if (agent.remainingDistance == 0) // walkign anim to false
         {
 
             anim.SetBool("IsWalking", false);
   
         }  
-        if (agent.velocity.sqrMagnitude > 0.1f)
+        if (agent.velocity.sqrMagnitude > 0.1f) //if its moving it plays animation
        {
            anim.SetBool("IsWalking", true);
         }
-        if (anim.GetBool("IsRolling"))
+        if (anim.GetBool("IsRolling")) //doesn work at the moment...
         {
             soundManager.RollSoundBMan();
         } else
@@ -96,7 +103,7 @@ public class BananaManController : MonoBehaviour
             
     }
 
-    void RandomPos()
+    void RandomPos() //gets a random popsition within a area.
     {
         //https://www.youtube.com/watch?v=dYs0WRzzoRc
 
@@ -118,7 +125,7 @@ public class BananaManController : MonoBehaviour
     }
 
 
-    void JumpToPlayer()
+    void JumpToPlayer() //goes to player, makes movement faster and palys a tiemr function for animation./
     {
         anim.SetBool("IsJumping", true);
         Debug.Log("Banana man jump" + player.position);
@@ -148,14 +155,14 @@ public class BananaManController : MonoBehaviour
             Instantiate(spiderPrefab, prefabSpawn.transform.position, Quaternion.identity);
         }
     }
-    IEnumerator ThrowingTimer()
+    IEnumerator ThrowingTimer() //until to trow animation resets.
     {
         yield return new WaitForSeconds(0.8f);
         SpawnPrefab();
         anim.SetBool("IsThrowing", false);
         Debug.Log("spawned and anim 4 banana man");
     }
-    IEnumerator ResetSpeedDelay(float normalSpeed)
+    IEnumerator ResetSpeedDelay(float normalSpeed) //resets speed and animation fro roll and jump.
     {
         yield return new WaitForSeconds(1); 
         agent.speed = normalSpeed;

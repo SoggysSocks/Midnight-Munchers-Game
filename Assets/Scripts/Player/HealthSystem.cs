@@ -14,20 +14,21 @@ public class HealthSystem : MonoBehaviour
     public Sprite fullHeart;
     public Sprite EmptyHeart; // skull
     public Animator UIanim; //UI
-
-    public List<AudioSource> sounds;
+    public StartStopRound startStopRound;
+    public List<AudioSource> sounds;  //sound effects
     // Start is called before the first frame update
 
 
     void Start()
     {
+        startStopRound = GetComponent<StartStopRound>();
         maxHealth = 3;
         heartNumber = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { //if max health s
         if(maxHealth > heartNumber)
         {
             maxHealth = heartNumber;
@@ -54,15 +55,18 @@ public class HealthSystem : MonoBehaviour
             }
         }
     }
-    public void Damage()
+    public void Damage() //takes one heart away from player
     {
+        startStopRound.EndRound();
         if (maxHealth <= 1)
         {
             
             gameOver.EndGame();
+
             
         } else
         {
+            startStopRound.DeleteAllEnemys();
             sounds[0].Play();
             sounds[1].Play();
             sounds[2].Play();

@@ -41,10 +41,11 @@ public class WeepingAngelController : MonoBehaviour
     public bool soundBool = false;
     public bool soundBool2 = false;
 
+    public StartStopRound startStopRound;
     //The Update() void, stuff occurs every frame in this void
     private void Start()    
     {
-        
+        startStopRound = FindObjectOfType<StartStopRound>();
         //need reference for prefab
         playerCam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -52,6 +53,10 @@ public class WeepingAngelController : MonoBehaviour
     }
     void Update()
     {
+        if (startStopRound.deleteAllEnemys) // Deletes enemy when player is damaged or round has ended
+        {
+            Destroy(gameObject);
+        }
         //Calculate the player's Camera's frustum planes
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(playerCam);
 

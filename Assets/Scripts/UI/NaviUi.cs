@@ -29,7 +29,7 @@ public class NaviUi : MonoBehaviour
         {
             if (roundSystem.fridgeDrinkTask)
             {
-                _text.text = "GRAB A DRINK";
+                _text.text = "GRAB A DRINK FROM THE FRIDGE";
                 Debug.Log("YOUR THIRSTY, GRAB A DRINK FROM THE FRIDGE");
             }
             if (roundSystem.snackTask)
@@ -43,7 +43,7 @@ public class NaviUi : MonoBehaviour
             }
             if (roundSystem.peeTask)
             {
-                _text.text = "GO TOILET";
+                _text.text = "GO TOILET (HIT THE TARGET)";
             }
         }
 

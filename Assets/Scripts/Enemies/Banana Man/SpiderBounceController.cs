@@ -18,15 +18,20 @@ public class SpiderBounceController : MonoBehaviour
 
     public HealthSystem healthSystem;
     public GameObject player;
+    public GameObject bMan;
     public AudioSource audioSource;
     public AudioSource audioSource2;
+    public float time;
+
+    public StartStopRound startStopRound;
 
     // Start is called before the first frame update
     void Start()
     {
+        startStopRound = FindObjectOfType<StartStopRound>(); //reference
         audioSource.Play();
         player = GameObject.FindWithTag("Player"); // yt 
-        if (player != null)
+        if (player != null) //if player is there.
         {
             healthSystem = player.GetComponent<HealthSystem>(); //
         }
@@ -40,13 +45,24 @@ public class SpiderBounceController : MonoBehaviour
         onWall = false;
         rb = GetComponent<Rigidbody>();
         
-
+        //other stuff such as gameobjects for particles.
     }
 
     // Update is called once per frame
     void Update()
     {
-  
+        if (startStopRound.deleteAllEnemys) // Deletes enemy when player is damaged or round has ended
+        {
+            Destroy(gameObject);
+        }
+        time += -Time.deltaTime;
+        if(time >= 2.5f)
+        {
+            Rotate();
+            time = 0;
+        }
+
+
         rb.velocity += -transform.right * Time.deltaTime * speed;
         
         timer += Time.deltaTime;
@@ -63,12 +79,12 @@ public class SpiderBounceController : MonoBehaviour
             onWall = false;
         }   
     }
-    public void RandomPos()
+    public void RandomPos() //bounces random direaction
     {
         // give nm number and reyurn it
         randomRot = Random.Range(0, 360);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //player collides with something other then floor it bounces off and plays a sound.
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
@@ -86,6 +102,14 @@ public class SpiderBounceController : MonoBehaviour
         {
             healthSystem.Damage();
             Destroy(gameObject);
+            Destroy(bMan);
+        }
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+        }
+        else
+        {
+            onWall = true;
         }
     }
 
@@ -97,6 +121,7 @@ public class SpiderBounceController : MonoBehaviour
     }
     IEnumerator Wait(float seconds)
     {
+        //has timer cuz soemtimes stuck on wall.
         yield return new WaitForSeconds(0.02f);
         RandomPos();
         Rotate();

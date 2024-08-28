@@ -86,6 +86,8 @@ public class NightmareSpawn : MonoBehaviour
             {
                 Instantiate(george, prefabSpawn.transform.position, Quaternion.identity);
                 Instantiate(george, prefabSpawn.transform.position, Quaternion.identity);
+                Instantiate(george, prefabSpawn.transform.position, Quaternion.identity);
+                Instantiate(bananaMan, prefabSpawn.transform.position, Quaternion.identity);
                 Instantiate(bananaMan, prefabSpawn.transform.position, Quaternion.identity);
                 Instantiate(bananaMan, prefabSpawn.transform.position, Quaternion.identity);
                 Instantiate(bananaMan, prefabSpawn.transform.position, Quaternion.identity);

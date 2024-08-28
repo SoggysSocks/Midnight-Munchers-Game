@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Value: {fileID: 0}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.21
   m_MaxSamples:
     m_OverrideState: 1
     m_Value: 6
@@ -40,7 +40,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.23
   xMultiplier:
     m_OverrideState: 1
     m_Value: 1
@@ -68,13 +68,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.3474415}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.09808906}
   midtones:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: -0.028105233}
   highlights:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.23236515}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -87,6 +87,28 @@ MonoBehaviour:
   highlightsEnd:
     m_OverrideState: 0
     m_Value: 1
+--- !u!114 &-2085711186313861178
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 0
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0.007561437}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.026465029}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.01890359}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +128,8 @@ MonoBehaviour:
   - {fileID: 1450490862858624408}
   - {fileID: -8247275904834465673}
   - {fileID: 2111228260403668903}
+  - {fileID: -2085711186313861178}
+  - {fileID: 5499531361214957912}
 --- !u!114 &353041549393731008
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -130,16 +154,16 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -3.8865542
   compensation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   limitMin:
     m_OverrideState: 0
     m_Value: -5
   limitMax:
     m_OverrideState: 1
-    m_Value: 13.3
+    m_Value: 15
   curveMap:
     m_OverrideState: 1
     m_Value:
@@ -223,7 +247,7 @@ MonoBehaviour:
     m_Value: 1
   adaptationSpeedDarkToLight:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2
   adaptationSpeedLightToDark:
     m_OverrideState: 1
     m_Value: 1
@@ -324,7 +348,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.82
+    m_Value: 0.14
   directLightingStrength:
     m_OverrideState: 1
     m_Value: 0.193
@@ -381,3 +405,61 @@ MonoBehaviour:
   m_DenoiserRadius:
     m_OverrideState: 1
     m_Value: 0.5
+--- !u!114 &5499531361214957912
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 3
+  focusMode:
+    m_OverrideState: 1
+    m_Value: 2
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 0.1
+  focusDistanceMode:
+    m_OverrideState: 1
+    m_Value: 1
+  nearFocusStart:
+    m_OverrideState: 1
+    m_Value: 0
+  nearFocusEnd:
+    m_OverrideState: 1
+    m_Value: 1
+  farFocusStart:
+    m_OverrideState: 1
+    m_Value: 10
+  farFocusEnd:
+    m_OverrideState: 1
+    m_Value: 10000
+  m_NearSampleCount:
+    m_OverrideState: 0
+    m_Value: 8
+  m_NearMaxBlur:
+    m_OverrideState: 1
+    m_Value: 8
+  m_FarSampleCount:
+    m_OverrideState: 0
+    m_Value: 7
+  m_FarMaxBlur:
+    m_OverrideState: 0
+    m_Value: 0
+  m_Resolution:
+    m_OverrideState: 0
+    m_Value: 2
+  m_HighQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 1
+  m_PhysicallyBased:
+    m_OverrideState: 0
+    m_Value: 0

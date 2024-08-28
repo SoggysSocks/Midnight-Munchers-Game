@@ -18,11 +18,12 @@ public class ToiletScript : MonoBehaviour
     public float lerpSpeed = 4;
     public float aimOffset = 1;
     public float rayCastDistance = 20;
-    public float noiseAmount = 0.08f;
+    public float noiseAmount = 0.12f;
     public float noiseSpeed = 0.5f;
     public float decreaseScore = 0;
 
     public bool canPeeArea = false;
+
 
     public SoundManager soundManager;
     private Vector3 previousHitPoint;
@@ -30,8 +31,10 @@ public class ToiletScript : MonoBehaviour
     private float time; //noise
 
     public GameObject pParticle;
-    public GameObject toiletUI; 
-    void Start()
+    public GameObject toiletUI;
+
+    public bool completeTask = true;
+    void Start()    
     {
         scoreMax = 150;
         previousHitPoint = playerAim.position;
@@ -48,16 +51,19 @@ public class ToiletScript : MonoBehaviour
         //decreaseScore = 0;  
         //}
         // if (Input.GetButtonDown("Fire1"))
-        //if (toiletScore >= scoreMax)
-        //{
-        //ToiletScoreMax();
-        //}
 
 
         if (roundSystem.peeTask)
         {
-            if(canPeeArea)
+
+            if (toiletScore >= scoreMax)
             {
+                ToiletScoreMax();
+            }
+            completeTask = true;
+            if (canPeeArea)
+            {
+
                 toiletUI.SetActive(true);
                 FireRay();
             }
@@ -136,10 +142,11 @@ public class ToiletScript : MonoBehaviour
         }
 
     }
-    public void ToiletScoreMax()
+    public void ToiletScoreMax() //task to true
     {
-        scoreMax = 0;
+        
         startStopRound.TaskToTrue();
+
     }
     void SpawnRayCastLine()
     {
@@ -163,9 +170,14 @@ public class ToiletScript : MonoBehaviour
         {
             canPeeArea = true;
         }
-        else
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
             canPeeArea = false;
+            toiletScore = 0;
+            toiletUI.SetActive(false);
         }
     }
 }
